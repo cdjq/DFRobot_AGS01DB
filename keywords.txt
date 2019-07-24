@@ -1,0 +1,25 @@
+#######################################
+# Syntax Coloring Map For DFRobot_AGS01DB
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+DFRobot_AGS01DB	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+readSensorVersion	KEYWORD2
+readVocPPM	KEYWORD2
+
+
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+
