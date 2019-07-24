@@ -3,10 +3,10 @@ AGS01DB 是一款含有已校准数字信号输出的MEMS VOC 气体传感器。
 感应传感技术，它的工作方式是IIC从机模式,此款MEMS气体传感器有低功耗高灵敏度、快速响应、高可靠性
 和稳定性、成本低、驱动电路简单等特点.该芯片可以检测到乙醇、氨气、硫化物、苯系蒸汽、烟雾和其它有
 害气体，单位是PPM(表示一百万份单位质量的溶液中所含溶质的质量).
-不同的VOC气体的安全值不一样，但大都小于100PPM,有的甚至小于10PPM，如苯：
-安全量：<1.5 PPM
-低报警量：1.5~3 PPM
-高报警量：3~8 PPM
+不同的VOC气体的安全值不一样，但大都小于100PPM,有的甚至小于10PPM，如苯
+安全量：小于1.5 PPM
+低报警量：1.5-3 PPM
+高报警量：3-8 PPM
  
 ![正反面svg效果图](https://github.com/ouki-wang/DFRobot_Sensor/raw/master/resources/images/SEN0245svg1.png)
 
@@ -73,7 +73,7 @@ micro:bit        |      √       |              |             |
 
 ## Credits
 
-Written by fengli(li.feng@dfrobot.com), 2019.7.22 (Welcome to our [website](https://www.dfrobot.com/))
+Written by fengli(li.feng@dfrobot.com), 2019.7.23 (Welcome to our [website](https://www.dfrobot.com/))
 
 
 
