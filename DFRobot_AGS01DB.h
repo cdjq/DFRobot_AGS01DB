@@ -27,7 +27,7 @@
 #define DBG(...)
 #endif
 
-#define AGS01DB_IIC_ADDR  (0x22>>1)  /*传感器设备的地址*/
+#define AGS01DB_IIC_ADDR  (0x11)  /*传感器设备的地址*/
 
 //#define ERR_OK             0      //无错误
 //#define ERR_DATA_BUS      -1      //数据总线错误

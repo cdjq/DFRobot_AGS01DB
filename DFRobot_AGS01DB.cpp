@@ -26,16 +26,15 @@ int DFRobot_AGS01DB::begin() {
 }
 
 float DFRobot_AGS01DB::readVocPPM() {
-  uint8_t readCMD[2];
+  uint8_t readCMD[3]={0};
   uint8_t data[3] = {0};
-  uint16_t voc=-10.0;
+  int voc=-10.0;
   readCMD[0] = CMD_DATA_COLLECTION_HIGH;
   readCMD[1] = CMD_DATA_COLLECTION_LOW;
   int retries = 10;
   // 当返回数据有误时，会再请求一次数据，直到数据无误。
   while(retries--) {
     writeCommand(readCMD, 2);
-    delay(100);
     readData(data, 3);
     //从传感器读回的数据，经过校验函数校验得到的voc是否正确。
     //校验为正确，则返回voc浓度
@@ -58,7 +57,6 @@ int DFRobot_AGS01DB::readSensorVersion() {
   int retries = 10;
   readCMD[0] = CMD_GET_VERSION_HIGH;
   readCMD[1] = CMD_GET_VERSION_LOW;
-  
   while (retries--) {
     writeCommand(readCMD, 2);
     readData(data, 2);
@@ -99,14 +97,14 @@ void DFRobot_AGS01DB::writeCommand(const void *pBuf, size_t size) {
   if (pBuf == NULL) {
     DBG("pBuf ERROR!! : null pointer");
   }
+
   uint8_t * _pBuf = (uint8_t *)pBuf;
-  _pWire->beginTransmission(AGS01DB_IIC_ADDR);
-  // 将命令通过iic发给芯片
-  for (uint16_t i = 0; i < size; i++) {
+  for (uint8_t i = 0; i < size; i++) {
+    _pWire->beginTransmission(AGS01DB_IIC_ADDR);
     _pWire->write(_pBuf[i]);
+    _pWire->endTransmission();
+   delay(3);
   }
-  delay(100);
-  _pWire->endTransmission();
 }
 
 uint8_t DFRobot_AGS01DB::readData(void *pBuf, size_t size) {
@@ -115,11 +113,11 @@ uint8_t DFRobot_AGS01DB::readData(void *pBuf, size_t size) {
   }
   uint8_t * _pBuf = (uint8_t *)pBuf;
   //读取芯片返回的数据
-  _pWire->requestFrom(AGS01DB_IIC_ADDR, size + 1);
+  _pWire->requestFrom(AGS01DB_IIC_ADDR, size);
   uint8_t i = 0;
-
-  for (uint8_t i = 0 ; i < size + 1 ; i++) {
+  for (uint8_t i = 0 ; i < size; i++) {
     _pBuf[i] = _pWire->read();
   }
+  //_pWire->endTransmission();
   return 1;
 }
