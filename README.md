@@ -1,6 +1,7 @@
 # DFRobot_AGS01DB
-AGS01DB is a MEMS VOC gas sensor with calibrated digital signal output. It adopts the special digital module acquisition technology and gas sensing technology to ensure high reliability and long-term stability. With IIC slave working mode, this MEMS gas sensor features low-power consumption, high sensitivity, fast response, low cost and simple drive circuit. It can be used to detect the presence of gases like ethanol, ammonia, sulfides, benzenes vapors, smoke and other harmful gases in the environment with unit PPM (parts per million)
-Every kind of gas has different safety values, but most of them are less than 100PPM or even 10PPM<br>
+AGS01DB is a MEMS VOC gas sensor with calibrated digital signal output. It adopts the special digital module acquisition technology and gas sensing technology to ensure high reliability and long-term stability. With IIC slave working mode, this MEMS gas sensor features low-power consumption, high sensitivity, fast response, low cost and simple drive circuit. It can be used to detect the presence of gases like ethanol, ammonia, sulfides, benzenes vapors, smoke and other harmful gases in the environment with unit PPM (parts per million).
+Every kind of gas has different safety values, but most of them are less than 100PPM or even 10PPM.<br>
+
 Benzene <br>
 Safety value: <1.5 PPM<br>
 Low warning: 1.5-3 PPM<br>
