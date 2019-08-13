@@ -1,6 +1,6 @@
 /*!
  * @file DFRobot_AGS01DB.h
- * @brief 定义DFRobot_AGS01DB 类的基础结构
+ * @brief Define the basic structure of class DFRobot_AGS01DB 
  * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @licence     The MIT License (MIT)
  * @author [fengli](li.feng@dfrobot.com)
@@ -27,61 +27,61 @@
 #define DBG(...)
 #endif
 
-#define AGS01DB_IIC_ADDR  (0x11)  /*传感器设备的地址*/
+#define AGS01DB_IIC_ADDR  (0x11)  /*sensor IIC address*/
 
-//#define ERR_OK             0      //无错误
-//#define ERR_DATA_BUS      -1      //数据总线错误
-//#define ERR_IC_VERSION    -2      //芯片版本不匹配
+//#define ERR_OK             0      //ok
+//#define ERR_DATA_BUS      -1      //error in data bus
+//#define ERR_IC_VERSION    -2      //chip version mismatch
 
 class DFRobot_AGS01DB
 {
 public:
-  #define CMD_DATA_COLLECTION_HIGH  0x00     /*获取voc的命令的高位*/
-  #define CMD_DATA_COLLECTION_LOW   0x02     /*获取voc的命令的低位*/
-  #define CMD_GET_VERSION_HIGH      0x0A     /*获取版本号的命令的高位*/
-  #define CMD_GET_VERSION_LOW       0x01      /*获取版本号的命令的低位*/
+  #define CMD_DATA_COLLECTION_HIGH  0x00     /*Get the high byte of command voc*/
+  #define CMD_DATA_COLLECTION_LOW   0x02     /*Get the low byte of command voc*/
+  #define CMD_GET_VERSION_HIGH      0x0A     /*Get the high byte of command Version*/
+  #define CMD_GET_VERSION_LOW       0x01      /*Get the low byte of command Version*/
   /*!
-   * @brief 构造函数.
+   * @brief Constructor 
    */
     DFRobot_AGS01DB(TwoWire * pWire = &Wire);
     
     /**
-   * @brief 初始化函数
-   * @return 返回0表示初始化成功，返回其他值表示初始化失败，返回错误码
+   * @brief init function
+   * @return Return 0 if initialization succeeds, otherwise return non-zero and error code.
    */
     int begin(void);
     
   /**
-   * @brief 读取空气中有害气体的浓度.
-   * @return 返回读取到的VOC浓度值，单位是ppm.
+   * @brief Read the concentration of the harmful gas in air
+   * @return Return the read VOC value, unit: ppm.
    */
     float readVocPPM();
     
   /**
-   * @brief 读取芯片的版本号.
-   * @return 返回读取到的版本号，如0x0B.
+   * @brief Read chip version 
+   * @return Return the read version, such as 0x0B.
    */
     int readSensorVersion();
 
 private:
   /**
-   * @brief 检测返回的CRC，是否与数据位的两个数据校验出的CRC8相等.
-   * @param data  数据位的数据.
-   * @param Num   需要检验数据的个数.
-   * @return      返回0表示验证正确，返回其他值表示验证为错误.
+   * @brief Detect if the returned CRC is equal to the CRC8 caculated through the two data in data byte.
+   * @param data  Data in data byte
+   * @param Num   The number of the data to be checked 
+   * @return      Return 0 if the check is correct, otherwise return non-zero.
    */
     bool   checkCRC8(uint8_t *data, uint8_t Num);
   /**
-   * @brief 向传感器芯片写指令.
-   * @param pBuf  指令中包含的数据.
-   * @param size  指令数据的个数.
+   * @brief Write command into sensor chip 
+   * @param pBuf  Data included in command
+   * @param size  The number of the byte of command
    */
     void  writeCommand(const void *pBuf,size_t size);
   /**
-   * @brief 向传感器芯片写指令.
-   * @param pBuf  指令中包含的数据.
-   * @param size  指令数据的个数.
-   * @return      返回0表示读取完成，返回其他值表示未能正确读取.
+   * @brief Write command into sensor chip 
+   * @param pBuf  Data included in command
+   * @param size  The number of the byte of command
+   * @return      Return 0 if the reading is done, otherwise return non-zero. 
    */
     uint8_t  readData(void *pBuf,size_t size);   
     
