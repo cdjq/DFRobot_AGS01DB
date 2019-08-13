@@ -1,6 +1,6 @@
 /*!
  * @file DFRobot_AGS01DB.h
- * @brief 定义DFRobot_AGS01DB 类的基础结构，基础方法的实现
+ * @brief Define the basic structure of class DFRobot_AGS01DB
  *
  * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @licence     The MIT License (MIT)
@@ -18,7 +18,7 @@ DFRobot_AGS01DB::DFRobot_AGS01DB(TwoWire * pWire)
 
 int DFRobot_AGS01DB::begin() {
   _pWire->begin();
-  //检验iic是否可以正常通信
+  //check if the IIC communication works 
   if (_pWire->requestFrom(AGS01DB_IIC_ADDR, 1) != 1) {
     return -1;
   }
@@ -32,12 +32,12 @@ float DFRobot_AGS01DB::readVocPPM() {
   readCMD[0] = CMD_DATA_COLLECTION_HIGH;
   readCMD[1] = CMD_DATA_COLLECTION_LOW;
   int retries = 10;
-  // 当返回数据有误时，会再请求一次数据，直到数据无误。
+  // when the returned data is wrong, request to get data again until the data is correct. 
   while(retries--) {
     writeCommand(readCMD, 2);
     readData(data, 3);
-    //从传感器读回的数据，经过校验函数校验得到的voc是否正确。
-    //校验为正确，则返回voc浓度
+    //read data from the sensor, check if VOC data got from the check function is correct. 
+    //if it is correct, retrun VOC concentration 
     if (checkCRC8(data, 2) == 1) {
       voc = data[0];
       voc <<= 8;
@@ -60,7 +60,7 @@ int DFRobot_AGS01DB::readSensorVersion() {
   while (retries--) {
     writeCommand(readCMD, 2);
     readData(data, 2);
-    //从传感器读回的数据，经过校验函数校验得到的版本号是否正确。
+    //read data from the sensor, check if the Version data got from the check function is correct.
     if (checkCRC8(data, 1) == 1) {
       version = data[0];
       return version;
@@ -73,7 +73,7 @@ int DFRobot_AGS01DB::readSensorVersion() {
 
 bool DFRobot_AGS01DB::checkCRC8(uint8_t *data, uint8_t Num) {
   uint8_t bit, byte, crc = 0xFF;
-  // 数据位的数据经过转换应该与校验位的数据相同
+  // the data of the converted data byte should be identical with the data got from the check function.
   for (byte = 0; byte < Num; byte++)
   {
     crc ^= (data[byte]);
@@ -85,7 +85,7 @@ bool DFRobot_AGS01DB::checkCRC8(uint8_t *data, uint8_t Num) {
           crc = (crc << 1);
     }
   }
-  //让计算的到的crc与读到的crc作比较，来判断读到的数据是否正确
+  //compare the caculated crc with the read crc to determine if the reading is correct
   if (crc == data[Num]) { 
     return true;
   } else {
@@ -112,7 +112,7 @@ uint8_t DFRobot_AGS01DB::readData(void *pBuf, size_t size) {
     DBG("pBuf ERROR!! : null pointer");
   }
   uint8_t * _pBuf = (uint8_t *)pBuf;
-  //读取芯片返回的数据
+  //read the data returned by the chip
   _pWire->requestFrom(AGS01DB_IIC_ADDR, size);
   uint8_t i = 0;
   for (uint8_t i = 0 ; i < size; i++) {
