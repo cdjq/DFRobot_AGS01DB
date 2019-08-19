@@ -1,8 +1,9 @@
 /*!
   *@file readVoc.ino
   *@brief Read the concentration of VOC and chip version. VOC unit: PPM (parts per million)
-  *@n Experiment phenomenon: read the chip version before using, then read VOC concentration every 3 seconds and print it out on seria port.
-  *@n Resolution: 0.1ppm; Measuring range: 0~100PPM 
+  * @n Experiment phenomenon: read the chip version before using, then read VOC concentration every 3 seconds and print it out
+  * @n on seria port.
+  * @n Resolution: 0.1ppm; Measuring range: 0~100PPM 
   *
   *@copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   *@licence     The MIT License (MIT)
@@ -35,7 +36,8 @@ void setup() {
 }
 void loop() {
 
-  //Read VOC every 3 seconds, and the interval should be more than 2s since the sampling cycle of the chip >=2s. If it is set to less than 2s, the reading will be one sampled at the last time. 
+  //Read VOC every 3 seconds, and the interval should be more than 2s since the sampling cycle of the chip >=2s. If it is set to less
+  //than 2s, the reading will be one sampled at the last time. 
   //Please pre-heat the deivce for 120s if using it after a long time to get more accurate readings.
   float voc = AGS01DB.readVocPPM();
   if(voc >= 0){
